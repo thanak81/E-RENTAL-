@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ARIAL;
+}
+
+.container{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.title{
+    font-size: 15px;
+    text-align: center;
+    padding: 25px;
+}
+
+.room-card{
+    border: 1px solid orange;
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.unavailable{
+    color: red;
+    font-weight: bold;
+}
+
+.available{
+    color: green;
+    font-weight: bold;
+}   
