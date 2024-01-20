@@ -10,6 +10,7 @@ body{
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .title{
@@ -36,3 +37,26 @@ body{
     color: green;
     font-weight: bold;
 }   
+
+.searchRoom{
+    text-align: center;
+    
+}
+
+.view{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+
+@media screen and (max-width: 600px){
+    .view{
+        justify-content: center;
+    }
+    .door{
+        height: 85px;
+    }
+}
