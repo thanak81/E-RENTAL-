@@ -15,15 +15,40 @@ function App() {
 
   const arrayroom = array.map((arr, index) => ({
     ...arr,
-    roomName: room + index,
+    roomName:"Room",
     id: crypto.randomUUID(),
     rented: false,
   }));
 
-  const [roomArray, setRoomArray] = useState(arrayroom);
+  const roomData = [
+    {
+    roomName: "Thanak",
+    id: crypto.randomUUID(),
+    rented: false
+    },
+    {
+    roomName: "Ronaldo",
+    id: crypto.randomUUID(),
+    rented: false
+    },
+    {
+    roomName: "Messi",
+    id: crypto.randomUUID(),
+    rented: false
+    },
+    {
+    roomName: "De Bruyne",
+    id: crypto.randomUUID(),
+    rented: false
+    },
+    
+]
+
+  const [roomArray, setRoomArray] = useState(roomData);
   const [countRented, setCountRented] = useState(0);
   const [countAvailable, setCountAvailable] = useState(roomArray.length);
   const [searchRoom, setSearchRoom] = useState("")
+  const [filter, setFilter] = useState("all")
 
 
   function rentRoom(roomId) {
@@ -62,6 +87,34 @@ function App() {
     setRoomArray(filterRoom)
     return filterRoom
   }
+
+ 
+
+  function showAll(e){
+    setFilter("all")
+  }
+
+  function showAvailable(e){
+    setFilter("available")
+  }
+
+  function showRented(e){
+    setFilter("rented")
+  }
+
+  const filteredRoom = roomArray.filter((room)=>{
+    if(filter === "all"){
+      return true
+    }else if(filter === "available"){
+      return !room.rented
+    }else if(filter === "rented"){
+      return room.rented
+    }else{
+      return false
+    }
+  })
+
+  let i =1;
   return (
     <>
       <div className="title">
@@ -81,12 +134,15 @@ function App() {
         </div>
         <div className="view">
           <span>View: </span>
-          <button>All</button>
-          <button>All Available Room</button>
-          <button>All Rented Room</button>
+          <button onClick={showAll} style={{backgroundColor:filter==="all"? "lightblue" : ""}}>All</button>
+          <button onClick={showAvailable } style={{backgroundColor:filter==="available"? "lightblue" : ""}}>All Available Room</button>
+          <button onClick={showRented} style={{backgroundColor:filter==="rented"? "lightblue" : ""}}>All Rented Room</button>
         </div>
       <div className="container">
-        {roomArray.map((room,index) => (
+        {filteredRoom.length === 0 ? (
+        <div>There are {filteredRoom.length} {filter} rooms</div>  
+      ):(
+        filteredRoom.map((room,index) => (
           <div key={room.id} className="room-card">
             {/* <div className="room_owner_title" >
               <p>Room Owner</p>
@@ -97,8 +153,8 @@ function App() {
             ):(
               <img src={door} className="door" alt="Door_Sold" height={140} />
             )}
-            <div>ID: {index+1}</div>
-            <div>Room: {index+1}</div>
+            <div>ID: {room.id.substring(0,3)}</div>
+            <div>{room.roomName}</div>
             {/* <div>{room.roomName}</div> */}
             {room.rented === true? (
               <div className="unavailable">Unavailable</div>
@@ -111,7 +167,9 @@ function App() {
               <button onClick={() => cancleRoom(room.id)}>Cancle Room</button>
             )}
           </div>
-        ))}
+        ))
+      )}
+       
        
       </div>
     </>
