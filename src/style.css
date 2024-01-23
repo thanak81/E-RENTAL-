@@ -54,7 +54,24 @@ body{
 .viewBTN{
     
 }
+.error-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: black;
+    color: white;
+}
 
+.create-form{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
 @media screen and (max-width: 600px){
     .view{
         justify-content: center;
